@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './HackerTerminal.css';
 import { parseCommand } from '../services/commandParser';
+import eventBus from '../shared/eventBus';
 
 const COMMANDS = [
   'storm',
@@ -13,10 +14,28 @@ const COMMANDS = [
 ];
 
 export default function HackerTerminal() {
-  // @todo : pour tester actuellement en local sans l'event bus : 
-  // @todo : à supprimer lors de l'implémentation de l'event bus
-  // console.log(parseCommand("storm"));
-  // console.log(parseCommand("blackout"));
+  const [history, setHistory] = useState([]);
+  const [input, setInput] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const result = parseCommand(input);
+
+    if (result.event) {
+      eventBus.emit(result.event, result.payload);
+      console.log('EVENT EMITTED', result.payload);
+    }
+
+    setHistory(prev => [
+      ...prev,
+      `root@neocity:~$ ${input}`,
+      result.feedback
+    ]);
+
+    setInput('');
+  };
+
   return (
     <div className="hacker-terminal">
       <div className="terminal-header">
@@ -24,14 +43,26 @@ export default function HackerTerminal() {
       </div>
 
       <div className="terminal-body">
-        <div className="line line-system">Mission: build a command terminal MFE.</div>
-        <div className="line line-system">Expected bus event to emit:</div>
-        <div className="line line-output">Bus output: hacker:command with command + level payload</div>
+        {history.map((line, i) => (
+          <div key={i} className="line">
+            {line}
+          </div>
+        ))}
+
+        <form onSubmit={handleSubmit} className="terminal-input">
+          <span>root@neocity:~$ </span>
+          <input
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            autoFocus
+            autoComplete="off"
+          />
+        </form>
+
         <div className="line line-system">Commands to support:</div>
         {COMMANDS.map((cmd) => (
           <div key={cmd} className="line line-output">- {cmd}</div>
         ))}
-        <div className="line line-success">TODO: input handling + history + help command.</div>
       </div>
     </div>
   );
