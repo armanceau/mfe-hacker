@@ -1,5 +1,6 @@
 import React from 'react';
 import './HackerTerminal.css';
+import { parseCommand } from '../services/commandParser';
 
 const COMMANDS = [
   'storm',
@@ -12,6 +13,10 @@ const COMMANDS = [
 ];
 
 export default function HackerTerminal() {
+  // @todo : pour tester actuellement en local sans l'event bus : 
+  // @todo : à supprimer lors de l'implémentation de l'event bus
+  // console.log(parseCommand("storm"));
+  // console.log(parseCommand("blackout"));
   return (
     <div className="hacker-terminal">
       <div className="terminal-header">
