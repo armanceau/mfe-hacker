@@ -1,69 +1,101 @@
-import React, { useState } from 'react';
-import './HackerTerminal.css';
-import { parseCommand } from '../services/commandParser';
-import eventBus from '../shared/eventBus';
+import React, { useState } from "react";
+import "./HackerTerminal.css";
 
-const COMMANDS = [
-  'storm',
-  'storm max',
-  'blackout',
-  'riot',
-  'drones',
-  'love',
-  'reset',
-];
-
-export default function HackerTerminal() {
+export default function Terminal() {
   const [history, setHistory] = useState([]);
-  const [input, setInput] = useState('');
+  const [command, setCommand] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const result = parseCommand(input);
+    const cmd = command.trim().toLowerCase();
 
-    if (result.event) {
-      eventBus.emit(result.event, result.payload);
-      console.log('EVENT EMITTED', result.payload);
+    const newHistory = [...history, `root@neocity:~$ ${cmd}`];
+
+    let feedback = "";
+    let event = null;
+
+    switch (cmd) {
+      case "storm":
+        feedback = "✓ Command executed: STORM LEVEL 2";
+        event = { command: "storm", level: 2 };
+        break;
+
+      case "storm max":
+        feedback = "✓ Command executed: STORM MAX LEVEL 3";
+        event = { command: "storm", level: 3 };
+        break;
+
+      case "blackout":
+        feedback = "✓ Command executed: BLACKOUT";
+        event = { command: "blackout", level: 2 };
+        break;
+
+      case "riot":
+        feedback = "✓ Command executed: RIOT";
+        event = { command: "riot", level: 2 };
+        break;
+
+      case "drones":
+        feedback = "✓ Command executed: DRONES FORMATION";
+        event = { command: "drones", level: 1 };
+        break;
+
+      case "love":
+        feedback = "✓ Command executed: LOVE MODE ❤️";
+        event = { command: "love", level: 1 };
+        break;
+
+      case "reset":
+        feedback = "✓ City reset to normal.";
+        event = { command: "reset", level: 0 };
+        break;
+
+      case "help":
+        feedback =
+          "Commands: storm | storm max | blackout | riot | drones | love | reset";
+        break;
+
+      default:
+        feedback = "⚠ Command not found. Type 'help'.";
     }
 
-    setHistory(prev => [
-      ...prev,
-      `root@neocity:~$ ${input}`,
-      result.feedback
-    ]);
+    // console pour tester l'event (comme demandé dans le brief)
+    if (event) {
+      console.log("EVENT:", {
+        event: "hacker:command",
+        payload: event,
+      });
+    }
 
-    setInput('');
+    newHistory.push(feedback);
+
+    setHistory(newHistory);
+    setCommand("");
   };
 
   return (
-    <div className="hacker-terminal">
-      <div className="terminal-header">
-        <span className="terminal-title">STUDENT STARTER - HACKER TERMINAL</span>
+    <div className="terminal">
+      <div className="header">
+        <div>[ NEOCITY BREACH v2.7 ]</div>
+        <div>- CONNECTED</div>
       </div>
 
-      <div className="terminal-body">
-        {history.map((line, i) => (
-          <div key={i} className="line">
-            {line}
-          </div>
-        ))}
-
-        <form onSubmit={handleSubmit} className="terminal-input">
-          <span>root@neocity:~$ </span>
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            autoFocus
-            autoComplete="off"
-          />
-        </form>
-
-        <div className="line line-system">Commands to support:</div>
-        {COMMANDS.map((cmd) => (
-          <div key={cmd} className="line line-output">- {cmd}</div>
+      <div className="history">
+        {history.map((line, index) => (
+          <div key={index}>{line}</div>
         ))}
       </div>
+
+      <form onSubmit={handleSubmit} className="input-line">
+        <span>root@neocity:~$ </span>
+        <input
+          value={command}
+          onChange={(e) => setCommand(e.target.value)}
+          autoFocus
+          autoComplete="off"
+        />
+      </form>
     </div>
   );
 }
