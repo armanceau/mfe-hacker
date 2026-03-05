@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1772710075044" clover="3.2.0">
+  <project timestamp="1772710075044" name="All files">
+    <metrics statements="30" coveredstatements="11" conditionals="17" coveredconditionals="9" methods="10" coveredmethods="1" elements="57" coveredelements="21" complexity="0" loc="30" ncloc="30" packages="2" files="2" classes="2"/>
+    <package name="services">
+      <metrics statements="11" coveredstatements="11" conditionals="9" coveredconditionals="9" methods="1" coveredmethods="1"/>
+      <file name="commandParser.js" path="C:\Users\jean-\Documents\guillaumedoss\efrei\scolarité\2ndann\3ndann\M2\MicroFrontend\groupMFE\mfe-hacker\src\services\commandParser.js">
+        <metrics statements="11" coveredstatements="11" conditionals="9" coveredconditionals="9" methods="1" coveredmethods="1"/>
+        <line num="2" count="42" type="stmt"/>
+        <line num="4" count="42" type="cond" truecount="9" falsecount="0"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="34" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="48" count="5" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared">
+      <metrics statements="19" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="9" coveredmethods="0"/>
+      <file name="eventBus.js" path="C:\Users\jean-\Documents\guillaumedoss\efrei\scolarité\2ndann\3ndann\M2\MicroFrontend\groupMFE\mfe-hacker\src\shared\eventBus.js">
+        <metrics statements="19" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="85" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="86" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

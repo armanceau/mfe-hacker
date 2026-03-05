@@ -3,7 +3,18 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/__tests__/**/*.test.js"],
+    "collectCoverageFrom": [
+      "src/services/**/*.js",
+      "src/shared/**/*.js"
+    ]
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -11,11 +22,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.23.0",
+    "babel-jest": "^30.2.0",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
+    "jest": "^30.2.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.0",
     "webpack-cli": "^5.1.4",
